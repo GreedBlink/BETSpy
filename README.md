@@ -4,3 +4,5 @@
 
 
 A python version of BETS (Brazilian Economic Time Series) package. 
+
+## Install
