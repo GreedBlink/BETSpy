@@ -5,4 +5,8 @@
 
 A python version of BETS (Brazilian Economic Time Series) package. 
 
-## Install
+## Installation
+
+```
+pip install git+https://github.com/GreedBlink/BETSpy
+```
