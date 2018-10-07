@@ -13,6 +13,49 @@ def getSeriesBacen(x = None, strat = '', to = '',save = ''):
     if(x is None):
         return('Need to specify at least one series.')
     
+        
+    if (start == ""):
+        data_init = '01/01/1980'
+    else:
+        data_init = start
+          
+    if (to == ""):
+        data_end = format(Sys.Date(), "%d/%m/%Y")
+    else:
+        data_end = to
+          
+    inputs = str(x)
+    tamanho = range(len(inputs))
+    serie = "serie_" + inputs 
+        
+    for i in tamanho:
+        texto=tryCatch({
+        k = 'http://api.bcb.gov.br/dados/serie/bcdata.sgs.' + str(inputs[i]) +   '/dados?formato=csv&dataInicial=' + data_init + '&dataFinal=' + data_end
+                        
+        dados = requests.get(k)
+        aux = dados.content
+        
+        
+        aux2= base::rawToChar(aux)
+             
+        DF <- data.frame(do.call(cbind, strsplit(aux2, "\r\n", fixed=TRUE)))
+        names(DF) <- "mist"
+        DF$mist   <- as.character(DF$mist)
+        DF$mist   <- gsub(x = DF$mist,pattern = '"',replacement = "")
+        DF$data   <- gsub(x = DF$mist,pattern = ";.*",replacement = "")
+        DF$valor  <- gsub(x = DF$mist,pattern = ".*;",replacement = "")
+        DF$valor  <- gsub(x = DF$valor,pattern = ",",replacement = ".")
+        DF <- DF[-1,-1]
+         })}
+         assign(serie[i], DF)
+         rm(DF, texto)
+          
+        
+          lista = list()
+          ls_df = ls()[grepl('data.frame', sapply(ls(), function(x) class(get(x))))]
+          for ( obj in ls_df ) { lista[obj]=list(get(obj))}
+
+    
     return()
 
 
