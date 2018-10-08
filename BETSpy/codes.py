@@ -28,36 +28,18 @@ def getSeriesBacen(x = None, strat = '', to = '',save = ''):
     inputs = [str(x)]
     tamanho = range(len(inputs))
     serie = "serie_" + inputs 
-        
+    dict_ts =  {}   
     for i in tamanho:
         try:
-           k = 'http://api.bcb.gov.br/dados/serie/bcdata.sgs.' + str(inputs[i]) +  '/dados?formato=csv&dataInicial=' + str(data_init) + '&dataFinal=' + str(data_end)
+           k = 'http://api.bcb.gov.br/dados/serie/bcdata.sgs.' + str(inputs[i]) +  '/dados?formato=json&dataInicial=' + str(data_init) + '&dataFinal=' + str(data_end)   
            r = requests.get(k)
-           aux = r.raw
-           
-         
-        
-        
-             
-        DF <- data.frame(do.call(cbind, strsplit(aux2, "\r\n", fixed=TRUE)))
-        names(DF) <- "mist"
-        DF$mist   <- as.character(DF$mist)
-        DF$mist   <- gsub(x = DF$mist,pattern = '"',replacement = "")
-        DF$data   <- gsub(x = DF$mist,pattern = ";.*",replacement = "")
-        DF$valor  <- gsub(x = DF$mist,pattern = ".*;",replacement = "")
-        DF$valor  <- gsub(x = DF$valor,pattern = ",",replacement = ".")
-        DF <- DF[-1,-1]
-         })}
-         assign(serie[i], DF)
-         rm(DF, texto)
-          
-        
-          lista = list()
-          ls_df = ls()[grepl('data.frame', sapply(ls(), function(x) class(get(x))))]
-          for ( obj in ls_df ) { lista[obj]=list(get(obj))}
-
-    
-    return()
+        except: 
+            time.sleep(2)
+            k = 'http://api.bcb.gov.br/dados/serie/bcdata.sgs.' + str(inputs[i]) +  '/dados?formato=json&dataInicial=' + str(data_init) + '&dataFinal=' + str(data_end)   
+            r = requests.get(k)
+            dados = pd.read_json(r.content)
+            dict_ts.update({str(serie): dados})
+    return(dict_ts)
 
 
 def getSeries(code, start = '', to = '', df = False, frequency = None):
