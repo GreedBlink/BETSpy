@@ -29,12 +29,11 @@ def getSeriesBacen(x = None, strat = '', to = '',save = ''):
     serie = "serie_" + inputs 
         
     for i in tamanho:
-        texto=tryCatch({
-        k = 'http://api.bcb.gov.br/dados/serie/bcdata.sgs.' + str(inputs[i]) +   '/dados?formato=csv&dataInicial=' + data_init + '&dataFinal=' + data_end
-                        
-        dados = requests.get(k)
-        aux = dados.content
-        
+        try:
+           k = 'http://api.bcb.gov.br/dados/serie/bcdata.sgs.' + str(inputs[i]) +  '/dados?formato=csv&dataInicial=' + str(data_init) + '&dataFinal=' + str(data_end
+           dados = requests.get(k)
+           aux = dados.content
+         
         
         aux2= base::rawToChar(aux)
              

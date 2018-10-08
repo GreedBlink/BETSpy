@@ -8,4 +8,10 @@ setup(name='BETSpy',
       author_email='jonatha.costa@fgv.br',
       license='GPL-3',
       packages=['BETSpy'],
+      install_requires=[
+          'pandas',
+          'requests'
+      ],
+      test_suite='nose.collector',
+      tests_require=['nose'],
       zip_safe=False)
