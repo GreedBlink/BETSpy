@@ -10,7 +10,8 @@ setup(name='BETSpy',
       packages=['BETSpy'],
       install_requires=[
           'pandas',
-          'requests'
+          'requests',
+          'datetime'
       ],
       test_suite='nose.collector',
       tests_require=['nose'],

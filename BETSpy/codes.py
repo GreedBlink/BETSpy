@@ -20,22 +20,24 @@ def getSeriesBacen(x = None, strat = '', to = '',save = ''):
         data_init = start
           
     if (to == ""):
-        data_end = format(Sys.Date(), "%d/%m/%Y")
+        data_end = datetime.datetime.now()
+        data_end = data_end.strftime("%d/%m/%Y")
     else:
         data_end = to
           
-    inputs = str(x)
+    inputs = [str(x)]
     tamanho = range(len(inputs))
     serie = "serie_" + inputs 
         
     for i in tamanho:
         try:
-           k = 'http://api.bcb.gov.br/dados/serie/bcdata.sgs.' + str(inputs[i]) +  '/dados?formato=csv&dataInicial=' + str(data_init) + '&dataFinal=' + str(data_end
-           dados = requests.get(k)
-           aux = dados.content
+           k = 'http://api.bcb.gov.br/dados/serie/bcdata.sgs.' + str(inputs[i]) +  '/dados?formato=csv&dataInicial=' + str(data_init) + '&dataFinal=' + str(data_end)
+           r = requests.get(k)
+           aux = r.raw
+           
          
         
-        aux2= base::rawToChar(aux)
+        
              
         DF <- data.frame(do.call(cbind, strsplit(aux2, "\r\n", fixed=TRUE)))
         names(DF) <- "mist"
