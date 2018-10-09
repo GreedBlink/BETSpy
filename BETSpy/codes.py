@@ -1,6 +1,17 @@
 
 
 def connection():
+    try:
+        conn = mysql.connector.connect(host ='',
+                                       database='',
+                                       user = '',
+                                       password='')
+        if conn.is_connected():
+    except Error as e:
+        print(e)
+    finally:    
+    conn.close()
+            
     return()
 
 
