@@ -14,7 +14,8 @@ setup(name='BETSpy',
           'datetime',
           'json',
           'time',
-          'mysql.connector'
+          'mysql.connector',
+          're'
       ],
       test_suite='nose.collector',
       tests_require=['nose'],

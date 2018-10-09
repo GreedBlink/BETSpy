@@ -10,13 +10,22 @@ def connection():
     except Error as e:
         print(e)
     finally:    
-    conn.close()
+        conn.close()
             
     return()
 
 
     
-def BETSsearch():
+def BETSsearch(description='*',src,periodicity,unit,code,start,lang='en'):
+    conn = connection()
+    
+    if(lang == 'en'):
+        tb = 'metadata_en'
+    else:
+        tb = 'metada_pt'
+        
+    if(description == '*'):
+        return(print('No search parameters. Please set the values of one or more parameters'))
     return()
     
 def getSeriesBacen(x = None, strat = '', to = '',save = ''):
