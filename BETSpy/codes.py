@@ -28,26 +28,26 @@ def BETSsearch(description='*',src,periodicity,unit,code,start,lang='en'):
         return(print('No search parameters. Please set the values of one or more parameters'))
     return()
     
-def getSeriesBacen(x = None, strat = '', to = '',save = ''):
+def getSeriesBacen(x = None, start = '', to = '',save = ''):
     
     if(x is None):
         return('Need to specify at least one series.')
     
         
-    if (start == ""):
+    if(start == ""):
         data_init = '01/01/1980'
     else:
         data_init = start
           
-    if (to == ""):
+    if(to == ""):
         data_end = datetime.datetime.now()
         data_end = data_end.strftime("%d/%m/%Y")
     else:
         data_end = to
           
-    inputs = [str(x)]
+    inputs = list(str(x))
     tamanho = range(len(inputs))
-    serie = "serie_" + inputs 
+    serie = 'series_' + str(inputs)
     dict_ts =  {}   
     for i in tamanho:
         try:
@@ -57,8 +57,8 @@ def getSeriesBacen(x = None, strat = '', to = '',save = ''):
             time.sleep(2)
             k = 'http://api.bcb.gov.br/dados/serie/bcdata.sgs.' + str(inputs[i]) +  '/dados?formato=json&dataInicial=' + str(data_init) + '&dataFinal=' + str(data_end)   
             r = requests.get(k)
-            dados = pd.read_json(r.content)
-            dict_ts.update({str(serie): dados})
+        dados = pd.read_json(r.content)
+        dict_ts.update({str(serie): dados})
     return(dict_ts)
 
 
