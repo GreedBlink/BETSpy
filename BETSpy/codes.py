@@ -24,8 +24,34 @@ def BETSsearch(description='*',src,periodicity,unit,code,start,lang='en'):
     else:
         tb = 'metada_pt'
         
-    if(description == '*'):
+    if(description == '*' and src == None and periocidity == None and unit = None and code == None):
         return(print('No search parameters. Please set the values of one or more parameters'))
+    else:
+        if(description == None and src == None and periocidity == None and unit = None and code == None):
+            conn.close()
+            return('No search parameters. Please set the values of one or more parameters.')
+        
+        params = list()
+        
+        if(description != None):
+            and_params = list()
+            or_params = list()
+            description = description.join('')
+            
+            exprs = re.fullmatch(string = description, pattern = "~?'(.*?)'" )
+            
+            if(len(exprs) !=0):
+                for exp in exprs:
+                    description = re.findall(exp,'', descripion)
+                    exprs[exp] = re.findall("~", "", exprs[exp])
+                    exprs[exp] = re.findall("'", "", exprs[exp])
+                    exprs[exp] = exprs[exp].strip()
+                    and_params = and_params.join("description not like " + "\'%"+ exprs[exp] +"%\'")
+                    
+            exprs = re.fullmatch(string = description,pattern = "'(.*?)'")
+            ....
+            ....
+            ....
     return()
     
 def getSeriesBacen(x = None, start = '', to = '',save = ''):
