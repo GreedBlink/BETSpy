@@ -49,6 +49,36 @@ def BETSsearch(description='*',src,periodicity,unit,code,start,lang='en'):
                     and_params = and_params.join("description not like " + "\'%"+ exprs[exp] +"%\'")
                     
             exprs = re.fullmatch(string = description,pattern = "'(.*?)'")
+            ...
+            .....
+            
+            # Match whole expressions
+        exprs = re.fullmatch(string = description,pattern = ("'(.*?)'")
+        
+        if(len(exprs) != 0):
+          for i in range(len(exprs)):
+            description = re.findall(exprs[i], "", description)
+            exprs[i] = re.findall("'", "", exprs[i])
+            exprs[i] = exprs[i].strip()
+            or_params = or_params.join("description like " + "\'%" + str(exprs[i]) + "%\'")
+          
+        
+        
+        # Do not match words
+        words = re.fullmatch(string = description,pattern = "~ ?(.*?)")
+        
+        if(len(words) != 0):
+          fori in range(len(words)):
+            description = re.findall(words[i], "", description)
+            words[i] = re.findall("~", "", words[i])
+            words[i] = words[i].strip()
+            and_params = and_params.join("description not like " + "\'%" + str(words[i]) + "%\'")
+          }
+        }
+   
+            
+            
+            
             ....
             ....
             ....
