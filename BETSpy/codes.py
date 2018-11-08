@@ -148,5 +148,5 @@ def BETSget(code, start = '', to = '', df = False, frequency = None):
         if(f == 1 and t == 1):
             for i in range(n):
               ts[i] =   getSeries(code, start, to, frequency)
-    return()
+    return(ts)
 
