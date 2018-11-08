@@ -2,7 +2,7 @@
 
 def connection():
     try:
-        conn = mysql.connector.connect(host ='',
+        conn = MySQLdb.connect(host ='',
                                        database='',
                                        user = '',
                                        password='')
@@ -12,7 +12,7 @@ def connection():
     finally:    
         conn.close()
             
-    return()
+    return(conn)
 
 
     
@@ -119,7 +119,22 @@ def getSeriesBacen(x = None, start = '', to = '',save = ''):
 
 
 def getSeries(code, start = '', to = '', df = False, frequency = None):
-    return()
+    if(re.match(pattern = 'ST_\d' , code)):
+        freq = 365 
+        db = connection()
+        c=db.cursor()
+                             
+        query = "select date, value from bets.IPC where code = " + str(code) + " order by date asc"
+        aux = c.execute(query)
+        aux = c.fetchone()
+        dados = dict(aux)
+        dados = pd.Series(dados,index=[aux.date])
+        return(dados)
+    else:
+        start = datetime.strptime(start, '%Y-%m-%d').strftime('%d/%m/%Y')                  
+        to = datetime.strptime(to, '%Y-%m-%d').strftime('%d/%m/%Y')
+        dados <- getSeriesBacen(x = code, start = start, to = to)
+        return(dados)
 
 def BETSget(code, start = '', to = '', df = False, frequency = None):
     n = len(code)
@@ -132,6 +147,6 @@ def BETSget(code, start = '', to = '', df = False, frequency = None):
         
         if(f == 1 and t == 1):
             for i in range(n):
-              ts[i] =   getSeries()
+              ts[i] =   getSeries(code, start, to, frequency)
     return()
 
