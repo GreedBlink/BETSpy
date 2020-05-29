@@ -3,7 +3,7 @@
 ![GitHub repo size in bytes](https://img.shields.io/github/repo-size/GreedBlink/BETSpy.svg)
 
 
-A python version of BETS (Brazilian Economic Time Series) package. It provids access to a many data from the BACEN, FGV and IBGE.
+A python version of BETS (Brazilian Economic Time Series) R package. It provids access to a many data from the BACEN, FGV and IBGE.
 
 ## Installation
 
